@@ -1,0 +1,2 @@
+export const ADD_TODO = "ADD_TODO";
+export const TOGGLE_TODO_COMPLETION = "TOGGLE_TODO_COMPLETION";
