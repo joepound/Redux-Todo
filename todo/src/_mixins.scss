@@ -40,6 +40,12 @@ $mobile-max-size: 500px;
   justify-content: $justify-content;
   align-items: $align-items;
 }
+@mixin smoothen-input-borders() {
+  border-top: none;
+  border-right: none;
+  border-bottom: 1px solid $lightgray;
+  border-left: none;
+}
 @mixin remove-hyperlink-styling($color) {
   color: $color;
   text-decoration: none;

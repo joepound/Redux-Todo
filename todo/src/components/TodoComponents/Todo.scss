@@ -1,0 +1,12 @@
+.todo-app__add-form {
+  @include make-flex(row, flex-start, center);
+
+  width: 100%;
+
+  &__task-input {
+    @include smoothen-input-borders();
+
+    width: 100%;
+    padding: 7.5px 10px;
+  }
+}
