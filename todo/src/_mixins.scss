@@ -45,6 +45,13 @@ $mobile-max-size: 500px;
   border-right: none;
   border-bottom: 1px solid $lightgray;
   border-left: none;
+  transition: border-bottom 500ms ease-in-out;
+
+  &:focus {
+    outline: none;  
+    border-bottom: 1px solid $turquoise;
+    transition: all 500ms ease-in-out;
+  }
 }
 @mixin remove-hyperlink-styling($color) {
   color: $color;
