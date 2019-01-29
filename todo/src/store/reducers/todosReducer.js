@@ -19,7 +19,7 @@ const todosReducer = (state = initialState, action) => {
     case ADD_TODO:
       const newTodo = {
         id: generateId(),
-        task: action.payload,
+        task: action.payload.task,
         completed: false
       };
       return {
