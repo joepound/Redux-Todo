@@ -1,14 +1,20 @@
 import { ADD_TODO, TOGGLE_TODO_COMPLETION } from "../actions/types";
 
 const initialState = {
-  todos: []
+  todos: [
+    {
+      id: "439856382475698734265",
+      task: "Sample todo.",
+      completed: false
+    }
+  ]
 };
 
 const generateId = () => {
   return `${Date.now()}${Math.floor(Math.random() * 100000000)}`;
 };
 
-export default (todosReducer = (state = initialState, action) => {
+const todosReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_TODO:
       const newTodo = {
@@ -33,4 +39,6 @@ export default (todosReducer = (state = initialState, action) => {
     default:
       return state;
   }
-});
+};
+
+export default todosReducer;
