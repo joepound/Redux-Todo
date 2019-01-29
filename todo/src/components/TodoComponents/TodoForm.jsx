@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
+
+import { addTodo } from "../../store/actions";
 
 class TodoForm extends Component {
   constructor(props) {
@@ -9,14 +12,23 @@ class TodoForm extends Component {
     };
   }
 
+  validateInput(input) {
+    return input.length;
+  }
+
   /* Action-based methods */
 
   addTodo = e => {
     e.preventDefault();
-    this.props.addTodo(this.state.taskInput);
-    this.setState({
-      taskInput: ""
-    });
+
+    if (this.validateInput(this.state.taskInput)) {
+      this.props.addTodo(this.state.taskInput);
+      this.setState({
+        taskInput: ""
+      });
+    } else {
+      alert("Please enter a task first.");
+    }
   };
 
   /* Event handler methods */
@@ -49,4 +61,9 @@ TodoForm.propTypes = {
   addTodo: PropTypes.func.isRequired
 };
 
-export default TodoForm;
+export default connect(
+  null,
+  {
+    addTodo
+  }
+)(TodoForm);

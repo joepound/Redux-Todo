@@ -1,7 +1,6 @@
 import React, { Fragment } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
-
-import { addTodo, toggleTodoCompletion } from "../../store/actions";
 
 import TodoForm from "./TodoForm";
 import TodoItem from "./TodoItem";
@@ -9,26 +8,26 @@ import TodoItem from "./TodoItem";
 const TodoContainer = props => {
   return (
     <Fragment>
-      <TodoForm addTodo={props.addTodo} />
+      <TodoForm />
       <div className="todo-app__list">
         {props.todos.map(todo => (
-          <TodoItem
-            key={todo.id}
-            todo={todo}
-            toggleTodoCompletion={props.toggleTodoCompletion}
-          />
+          <TodoItem key={todo.id} todo={todo} />
         ))}
       </div>
     </Fragment>
   );
 };
 
-export default connect(
-  state => ({
-    todos: state.todosReducer.todos
-  }),
-  {
-    addTodo,
-    toggleTodoCompletion
-  }
-)(TodoContainer);
+TodoContainer.propTypes = {
+  todos: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      task: PropTypes.string.isRequired,
+      completed: PropTypes.bool.isRequired
+    })
+  ).isRequired
+};
+
+export default connect(state => ({
+  todos: state.todosReducer.todos
+}))(TodoContainer);

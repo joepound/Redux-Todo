@@ -1,5 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
+
+import { toggleTodoCompletion } from "../../store/actions";
 
 const TodoItem = props => {
   const toggleTodoCompletion = e => props.toggleTodoCompletion(props.todo.id);
@@ -30,4 +33,9 @@ TodoItem.propTypes = {
   toggleTodoCompletion: PropTypes.func.isRequired
 };
 
-export default TodoItem;
+export default connect(
+  null,
+  {
+    toggleTodoCompletion
+  }
+)(TodoItem);
