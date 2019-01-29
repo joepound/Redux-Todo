@@ -1,4 +1,8 @@
-.App {
+.todo-app {
+  position: relative;
   width: 100%;
   max-width: 500px;
+  background-color: $inner-bg-color;
+  padding: 30px 15px 50px;
+  margin: 0 auto;
 }

@@ -3,8 +3,13 @@
   }
   
   html {
-    font-family: "Roboto";
+    font-family: $body-font-family;
     font-size: 62.5%;
+    color: $default-font-color;
+  }
+
+  body {
+    background-color: $outer-bg-color;
   }
   
   p {

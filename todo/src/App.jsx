@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
+import React from "react";
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        
-      </div>
-    );
-  }
-}
+import HeaderContainer from "./components/HeaderComponents/HeaderContainer";
+
+const App = props => {
+  return (
+    <div className="todo-app">
+      <HeaderContainer />
+    </div>
+  );
+};
 
 export default App;

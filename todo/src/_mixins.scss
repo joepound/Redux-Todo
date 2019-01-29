@@ -1,0 +1,46 @@
+// Media query styling
+
+$tablet-max-size: 800px;
+$mobile-max-size: 500px;
+
+@mixin tablet-view {
+  @media (max-width: #{$tablet-max-size}) {
+    @content;
+  }
+}
+@mixin mobile-view {
+  @media (max-width: #{$mobile-max-size}) {
+    @content;
+  }
+}
+
+// General reusable styles
+
+@mixin set-colors(
+  $bg-color,
+  $font-color,
+  $border-size,
+  $border-style,
+  $border-color
+) {
+  background-color: $bg-color;
+  color: $font-color;
+  @if variable-exists(border-size) {
+    border: $border-size $border-style $border-color;
+  }
+}
+@mixin make-flex(
+  $flex-direction: row,
+  $justify-content: flex-start,
+  $align-items: flex-start,
+  $flex-wrap: nowrap
+) {
+  display: flex;
+  flex-flow: $flex-direction, $flex-wrap;
+  justify-content: $justify-content;
+  align-items: $align-items;
+}
+@mixin remove-hyperlink-styling($color) {
+  color: $color;
+  text-decoration: none;
+}
