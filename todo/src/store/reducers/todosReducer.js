@@ -37,6 +37,7 @@ const todosReducer = (state = initialState, action) => {
         [action.payload.key]: action.payload.input
       };
     case ADD_TODO:
+      console.log(action.payload)
       const newTodo = {
         id: generateId(),
         task: action.payload,

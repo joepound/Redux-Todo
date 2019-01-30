@@ -15,6 +15,10 @@ class TodoForm extends Component {
     this.props.handleTextInputChange("newTaskInput", "");
   }
 
+  validateInput(input) {
+    return Boolean(input);
+  }
+
   handleInputChange = e => {
     this.props.handleTextInputChange(
       e.currentTarget.name,
@@ -22,9 +26,23 @@ class TodoForm extends Component {
     );
   };
 
+  addTodo = e => {
+    // Prevent refresh when onSubmit is triggered
+    e.preventDefault();
+
+    // Use input validation method as conditional
+    if (this.validateInput(this.props.newTaskInput)) {
+      this.props.addTodo(this.props.newTaskInput);
+      this.props.handleTextInputChange("newTaskInput", "");
+    } else {
+      // If "required" attribute of an input field have been altered
+      alert("Please enter a task first.");
+    }
+  };
+
   render() {
     return (
-      <form className="todo-app__new-todo-form" onSubmit={this.props.addTodo}>
+      <form className="todo-app__new-todo-form" onSubmit={this.addTodo}>
         <input
           className="todo-app__new-todo-form__task-input"
           placeholder="Enter a task"

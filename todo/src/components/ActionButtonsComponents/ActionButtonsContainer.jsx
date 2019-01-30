@@ -1,12 +1,13 @@
 import React from "react";
-import PropTypes from "prop-types";
+
+import AddTodoButton from "./AddTodoButton";
 
 const ActionButtonsContainer = props => {
   return (
     <div className="todo-app__action-btns">
-    
+      <AddTodoButton />
     </div>
   );
 };
 
-export default  ActionButtonsContainer;
+export default ActionButtonsContainer;
