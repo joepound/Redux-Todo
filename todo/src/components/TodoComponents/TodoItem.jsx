@@ -18,21 +18,30 @@ const TodoItem = props => {
       >
         • {props.todo.task}
       </p>
-      <input
-        className={
-          props.todo.completed
-            ? "todo-app__list__item__toggle-completion-btn--completed"
-            : "todo-app__list__item__toggle-completion-btn--incomplete"
-        }
-        type="image"
-        src={
-          props.todo.completed
-            ? "images/complete-task.png"
-            : "images/incomplete-task.png"
-        }
-        alt="Toggle completion status"
-        onClick={toggleTodoCompletion}
-      />
+      <div className="todo-app__list__item__actions">
+        <input
+          className={
+            props.todo.completed
+              ? "todo-app__list__item__actions__toggle-completion-btn--completed"
+              : "todo-app__list__item__actions__toggle-completion-btn--incomplete"
+          }
+          type="image"
+          src={
+            props.todo.completed
+              ? "images/complete-task.png"
+              : "images/incomplete-task.png"
+          }
+          alt="Toggle completion status"
+          onClick={toggleTodoCompletion}
+        />
+        <input
+          className="todo-app__list__item__actions__delete-btn"
+          type="image"
+          src="images/delete-todo.png"
+          alt="Delete todo item"
+          onClick={toggleTodoCompletion}
+        />
+      </div>
     </div>
   );
 };

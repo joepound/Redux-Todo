@@ -50,26 +50,42 @@
       }
     }
 
-    %toggle-completion-btn {
-      display: inline-block;
-      width: 25px;
-      cursor: pointer;
-    }
+    &__actions {
+      min-width: 70px;
 
-    &__toggle-completion-btn {
-      &--incomplete {
-        @extend %toggle-completion-btn;
+      %todo-item-action-btn {
+        display: inline-block;
+        width: 25px;
+        cursor: pointer;
+        margin-left: 10px;
+      }
 
-        transition: filter 375ms;
+      &__toggle-completion-btn {
+        &--incomplete {
+          @extend %todo-item-action-btn;
 
-        &:hover {
-          filter: brightness(110%);
-          transition: all 250ms;
+          transition: filter 375ms;
+
+          &:hover {
+            filter: brightness(110%);
+            transition: all 250ms;
+          }
+        }
+
+        &--completed {
+          @extend %todo-item-action-btn;
+
+          transition: filter 375ms;
+
+          &:hover {
+            filter: brightness(75%);
+            transition: all 250ms;
+          }
         }
       }
 
-      &--completed {
-        @extend %toggle-completion-btn;
+      &__delete-btn {
+        @extend %todo-item-action-btn;
 
         transition: filter 375ms;
 
