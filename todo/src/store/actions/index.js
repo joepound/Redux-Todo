@@ -81,13 +81,16 @@ export const clearCompletedTodos = todos => dispatch => {
     axios
       .delete(`http://localhost:5000/api/todos/${id}`)
       .then(res => dispatch({ type: DELETE_TODO_ITEM, payload: res.data }))
-      .catch(
-        error =>
-          (action = {
-            type: ERROR_STATE,
-            payload: "Error in removing completed todos"
-          })
-      );
+      .catch(error => {
+        action = {
+          type: ERROR_STATE,
+          payload: "Error in removing completed todos"
+        };
+        dispatch({
+          type: ERROR_STATE,
+          payload: "Error in deleting todo item"
+        });
+      });
 
   for (let i = 0; i < completedTodos.length; i++) {
     deleteItem(completedTodos[i].id);
