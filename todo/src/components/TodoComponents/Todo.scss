@@ -1,6 +1,6 @@
 .todo-app__new-todo-form {
   &__task-input {
-    @include smoothen-input-borders();
+    @include smoothen-input-borders($turquoise);
 
     width: 100%;
     font-size: $body-font-size;
@@ -8,32 +8,32 @@
     margin-bottom: 37.5px;
   }
 
-  &__add-btn {
-    position: fixed;
-    bottom: 15px;
-    left: 50%;
-    display: inline-block;
-    background-color: $turquoise;
-    text-align: center;
-    font-size: 5rem;
-    font-weight: bold;
-    color: $white;
-    cursor: pointer;
-    padding: 5px 17.5px;
-    border: none;
-    border-radius: 100%;
-    margin-left: -30px;
-    transition: filter 375ms;
+  // &__add-btn {
+  //   position: fixed;
+  //   bottom: 15px;
+  //   left: 50%;
+  //   display: inline-block;
+  //   background-color: $turquoise;
+  //   text-align: center;
+  //   font-size: 5rem;
+  //   font-weight: bold;
+  //   color: $white;
+  //   cursor: pointer;
+  //   padding: 5px 17.5px;
+  //   border: none;
+  //   border-radius: 100%;
+  //   margin-left: -30px;
+  //   transition: filter 375ms;
 
-    &:hover {
-      filter: brightness(75%);
-      transition: all 250ms;
-    }
+  //   &:hover {
+  //     filter: brightness(75%);
+  //     transition: all 250ms;
+  //   }
 
-    &:active {
-      filter: brightness(50%);
-    }
-  }
+  //   &:active {
+  //     filter: brightness(50%);
+  //   }
+  // }
 }
 
 .todo-app__list {
@@ -52,25 +52,12 @@
       font-size: $body-font-size;
       padding: 0 10px;
       margin-right: 20px;
-
-      &::before {
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: 0;
-        right: 0;
-        border-top: 2.5px solid $lightgray;
-      }
     }
 
     &__task {
       @extend %task;
 
       transition: color 500ms;
-
-      &::before {
-        animation: fade-out 625ms forwards;
-      }
 
       &--completed {
         @extend %task;
@@ -79,20 +66,45 @@
         transition: color 750ms;
 
         &::before {
-          animation: strikethrough-in 500ms 125ms backwards;
+          content: "";
+          position: absolute;
+          top: 50%;
+          left: 0;
+          right: 0;
+          border-top: 2.5px solid $lightgray;
+          animation: strikethrough-in 500ms 125ms both;
         }
       }
     }
 
-    &__toggle-completion-btn {
+
+    %toggle-completion-btn {
       display: inline-block;
       width: 25px;
       cursor: pointer;
-      transition: filter 375ms;
+    }
 
-      &:hover {
-        filter: brightness(110%);
-        transition: all 250ms;
+    &__toggle-completion-btn {
+      &--incomplete {
+        @extend %toggle-completion-btn;
+
+        transition: filter 375ms;
+
+        &:hover {
+          filter: brightness(110%);
+          transition: all 250ms;
+        }
+      }
+
+      &--completed {
+        @extend %toggle-completion-btn;
+
+        transition: filter 375ms;
+
+        &:hover {
+          filter: brightness(75%);
+          transition: all 250ms;
+        }
       }
     }
   }

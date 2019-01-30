@@ -27,7 +27,7 @@ $tablet-min-size: 500px;
   justify-content: $justify-content;
   align-items: $align-items;
 }
-@mixin smoothen-input-borders() {
+@mixin smoothen-input-borders($focus-border-color) {
   border-top: none;
   border-right: none;
   border-bottom: 1px solid $lightgray;
@@ -36,7 +36,7 @@ $tablet-min-size: 500px;
 
   &:focus {
     outline: none;  
-    border-bottom: 1px solid $turquoise;
+    border-bottom: 1px solid $focus-border-color;
     transition: all 500ms ease-in-out;
   }
 }

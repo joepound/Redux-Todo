@@ -1,13 +1,28 @@
-import { ADD_TODO, TOGGLE_TODO_COMPLETION } from "../actions/types";
+import {
+  ADD_TODO,
+  TOGGLE_TODO_COMPLETION,
+  HANDLE_TEXT_INPUT_CHANGE
+} from "../actions/types";
 
 const initialState = {
   todos: [
     {
       id: "439856382475698734265",
-      task: "Sample todo.",
+      task: "Learn React hooks",
+      completed: false
+    },
+    {
+      id: "247569439856388734265",
+      task: "Learn Redux",
+      completed: true
+    },
+    {
+      id: "569873424398563824765",
+      task: "Learn TypeScript",
       completed: false
     }
-  ]
+  ],
+  newTaskInput: ""
 };
 
 const generateId = () => {
@@ -16,10 +31,15 @@ const generateId = () => {
 
 const todosReducer = (state = initialState, action) => {
   switch (action.type) {
+    case HANDLE_TEXT_INPUT_CHANGE:
+      return {
+        ...state,
+        [action.payload.key]: action.payload.input
+      };
     case ADD_TODO:
       const newTodo = {
         id: generateId(),
-        task: action.payload.task,
+        task: action.payload,
         completed: false
       };
       return {

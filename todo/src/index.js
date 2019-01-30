@@ -9,7 +9,9 @@ import "./index.scss";
 
 import App from "./App";
 
-const store = createStore(rootReducer);
+const store = createStore(
+  rootReducer
+);
 
 ReactDOM.render(
   <Provider store={store}>

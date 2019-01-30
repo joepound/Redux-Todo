@@ -18,14 +18,19 @@ const TodoItem = props => {
       >
         • {props.todo.task}
       </p>
-      <img
-        className="todo-app__list__item__toggle-completion-btn"
+      <input
+        className={
+          props.todo.completed
+            ? "todo-app__list__item__toggle-completion-btn--completed"
+            : "todo-app__list__item__toggle-completion-btn--incomplete"
+        }
+        type="image"
         src={
           props.todo.completed
             ? "images/complete-task.png"
             : "images/incomplete-task.png"
         }
-        alt="Toggle completion"
+        alt="Toggle completion status"
         onClick={toggleTodoCompletion}
       />
     </div>
