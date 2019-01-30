@@ -1,6 +1,6 @@
 .todo-app__new-todo-form {
   &__task-input {
-    @include smoothen-input-borders($turquoise);
+    @include smoothen-input-borders($input-focus-color);
 
     width: 100%;
     font-size: $body-font-size;
@@ -35,7 +35,7 @@
       &--completed {
         @extend %task;
 
-        color: $lightgray;
+        color: $completed-task-color;
         transition: color 750ms;
 
         &::before {
@@ -44,12 +44,11 @@
           top: 50%;
           left: 0;
           right: 0;
-          border-top: 2.5px solid $lightgray;
+          border-top: 2.5px solid $completed-task-color;
           animation: strikethrough-in 500ms 125ms both;
         }
       }
     }
-
 
     %toggle-completion-btn {
       display: inline-block;

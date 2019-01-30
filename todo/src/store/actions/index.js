@@ -1,7 +1,8 @@
 import {
   HANDLE_TEXT_INPUT_CHANGE,
   ADD_TODO,
-  TOGGLE_TODO_COMPLETION
+  TOGGLE_TODO_COMPLETION,
+  CLEAR_COMPLETED_TODOS
 } from "./types";
 
 export const handleTextInputChange = (key, input) => ({
@@ -16,7 +17,12 @@ export const addTodo = task => ({
   type: ADD_TODO,
   payload: task
 });
+
 export const toggleTodoCompletion = id => ({
   type: TOGGLE_TODO_COMPLETION,
   payload: id
+});
+
+export const clearCompletedTodos = () => ({
+  type: CLEAR_COMPLETED_TODOS
 });

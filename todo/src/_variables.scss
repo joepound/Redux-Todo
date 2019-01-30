@@ -4,6 +4,7 @@ $white: #ffffff;
 $mine-shaft: #2c2c2c;
 $lightgray: #d3d3d3;
 $turquoise: #50e3a4;
+$amaranth: #e83f53;
 
 /*  Color assignments */
 
@@ -25,3 +26,16 @@ $heading-font-size: 2.4rem;
 // Header component assignments
 $app-name-font-family: $heading-font-family;
 $app-name-font-size: 3.2rem;
+
+// TodoForm component assignments
+$input-focus-color: $turquoise;
+
+// TodoItem component assignments
+$completed-task-color: $lightgray;
+
+// Action button components assignments
+$action-buttons-area-bg-color: $lightgray;
+$clear-completed-bg-color: $amaranth;
+$clear-completed-font-color: $white;
+$add-todo-bg-color: $turquoise;
+$add-todo-font-color: $white;

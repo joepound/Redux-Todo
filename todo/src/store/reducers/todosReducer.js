@@ -1,7 +1,8 @@
 import {
   ADD_TODO,
   TOGGLE_TODO_COMPLETION,
-  HANDLE_TEXT_INPUT_CHANGE
+  HANDLE_TEXT_INPUT_CHANGE,
+  CLEAR_COMPLETED_TODOS
 } from "../actions/types";
 
 const initialState = {
@@ -37,7 +38,7 @@ const todosReducer = (state = initialState, action) => {
         [action.payload.key]: action.payload.input
       };
     case ADD_TODO:
-      console.log(action.payload)
+      console.log(action.payload);
       const newTodo = {
         id: generateId(),
         task: action.payload,
@@ -56,6 +57,20 @@ const todosReducer = (state = initialState, action) => {
       return {
         ...state,
         todos
+      };
+    case CLEAR_COMPLETED_TODOS:
+      const incompleteTodos = state.todos.filter(todo => !todo.completed);
+      return {
+        ...state,
+        todos:
+          // Check first if there are any completed todos before firing the confirmation dialog
+          state.todos.length - incompleteTodos.length > 0 && // Used && for short-circuit evaluation of conditional expression
+          window.confirm(
+            // Confirmation dialog for clearing the completed todos
+            "Are you sure you want to delete all completed todos?"
+          )
+            ? incompleteTodos
+            : state.todos
       };
     default:
       return state;
