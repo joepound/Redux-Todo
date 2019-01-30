@@ -8,16 +8,34 @@ import {
 
 import sampleTodoData from "../../sampleTodoData";
 
-const initialState = {
-  todos: JSON.parse(localStorage.getItem("todos")) || sampleTodoData,
-  newTaskInput: ""
-};
-
 const generateId = () => {
   return `${Date.now()}${Math.floor(Math.random() * 100000000)}`;
 };
 
+const getFromLocalStorage = key => {
+  try {
+    return JSON.parse(localStorage.getItem(key));
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const setOnLocalStorage = (key, value) => {
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const initialState = {
+  todos: getFromLocalStorage("todos") || sampleTodoData,
+  newTaskInput: ""
+};
+
 const todosReducer = (state = initialState, action) => {
+  let updatedTodos;
+
   switch (action.type) {
     case HANDLE_TEXT_INPUT_CHANGE:
       return {
@@ -25,44 +43,55 @@ const todosReducer = (state = initialState, action) => {
         [action.payload.key]: action.payload.input
       };
     case ADD_TODO:
-      const newTodo = {
-        id: generateId(),
-        task: action.payload,
-        completed: false
-      };
+      updatedTodos = [
+        ...state.todos,
+        {
+          id: generateId(),
+          task: action.payload,
+          completed: false
+        }
+      ];
+      setOnLocalStorage("todos", updatedTodos);
       return {
         ...state,
-        todos: [...state.todos, newTodo]
+        todos: updatedTodos
       };
     case TOGGLE_TODO_COMPLETION:
-      const todos = state.todos.map(todo =>
+      updatedTodos = state.todos.map(todo =>
         todo.id === action.payload
           ? { ...todo, completed: !todo.completed }
           : todo
       );
+      setOnLocalStorage("todos", updatedTodos);
       return {
         ...state,
-        todos
+        todos: updatedTodos
       };
     case DELETE_TODO_ITEM:
+      updatedTodos = state.todos.filter(todo => todo.id !== action.payload);
+      setOnLocalStorage("todos", updatedTodos);
       return {
         ...state,
-        todos: state.todos.filter(todo => todo.id !== action.payload)
+        todos: updatedTodos
       };
     case CLEAR_COMPLETED_TODOS:
-      const incompleteTodos = state.todos.filter(todo => !todo.completed);
-      return {
-        ...state,
-        todos:
-          // Check first if there are any completed todos before firing the confirmation dialog
-          state.todos.length - incompleteTodos.length > 0 && // Used && for short-circuit evaluation of conditional expression
-          window.confirm(
-            // Confirmation dialog for clearing the completed todos
-            "Are you sure you want to delete all completed todos?"
-          )
-            ? incompleteTodos
-            : state.todos
-      };
+      updatedTodos = state.todos.filter(todo => !todo.completed);
+
+      if (
+        // Check first if there are any completed todos before firing the confirmation dialog
+        // Used && for short-circuit evaluation of conditional expression
+        state.todos.length - updatedTodos.length > 0 &&
+        window.confirm(
+          // Confirmation dialog for clearing the completed todos
+          "Are you sure you want to delete all completed todos?"
+        )
+      ) {
+        setOnLocalStorage("todos", updatedTodos);
+        return {
+          ...state,
+          todos: updatedTodos
+        };
+      }
     default:
       return state;
   }
