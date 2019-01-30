@@ -9,7 +9,15 @@ const TodoItem = props => {
 
   return (
     <div className="todo-app__list__item">
-      <div className="todo-app__list__item__task">• {props.todo.task}</div>
+      <p
+        className={
+          props.todo.completed
+            ? "todo-app__list__item__task--completed"
+            : "todo-app__list__item__task"
+        }
+      >
+        • {props.todo.task}
+      </p>
       <img
         className="todo-app__list__item__toggle-completion-btn"
         src={

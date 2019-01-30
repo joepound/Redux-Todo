@@ -3,6 +3,7 @@
     @include smoothen-input-borders();
 
     width: 100%;
+    font-size: $body-font-size;
     padding: 7.5px 10px;
     margin-bottom: 37.5px;
   }
@@ -43,15 +44,49 @@
 
     margin-bottom: 25px;
 
-    &__task {
+    %task {
+      position: relative;
+      overflow: hidden;
       display: inline-block;
-      width: 75%;
-      font-size: 1.6rem;
+      word-break: break-all;
+      font-size: $body-font-size;
+      padding: 0 10px;
+      margin-right: 20px;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        border-top: 2.5px solid $lightgray;
+      }
+    }
+
+    &__task {
+      @extend %task;
+
+      transition: color 500ms;
+
+      &::before {
+        animation: fade-out 625ms forwards;
+      }
+
+      &--completed {
+        @extend %task;
+
+        color: $lightgray;
+        transition: color 750ms;
+
+        &::before {
+          animation: strikethrough-in 500ms 125ms backwards;
+        }
+      }
     }
 
     &__toggle-completion-btn {
       display: inline-block;
-      max-width: 25px;
+      width: 25px;
       cursor: pointer;
       transition: filter 375ms;
 

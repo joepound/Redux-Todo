@@ -1,6 +1,7 @@
 .todo-app__app-name {
   text-align: center;
-  font-size: 3rem; 
+  font-family: $app-name-font-family;
+  font-size: $app-name-font-size;
   text-transform: uppercase;
   letter-spacing: 2.5px;
   word-spacing: 10px;

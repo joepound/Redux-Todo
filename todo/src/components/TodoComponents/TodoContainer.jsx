@@ -28,6 +28,7 @@ TodoContainer.propTypes = {
   ).isRequired
 };
 
+// Contains anonymous callback used as the mapStateToProps method
 export default connect(state => ({
   todos: state.todosReducer.todos
 }))(TodoContainer);

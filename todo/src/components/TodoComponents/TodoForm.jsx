@@ -12,31 +12,35 @@ class TodoForm extends Component {
     };
   }
 
+  // Check if task input for new todo is not an empty string (returns boolean)
   validateInput(input) {
-    return input.length;
+    return Boolean(input);
   }
 
-  /* Action-based methods */
+  /* Event handler methods */
 
+  // For controlling value of new task input form
+  handleTaskInputChange = e => {
+    this.setState({
+      taskInput: e.currentTarget.value
+    });
+  };
+
+  // Action-based method - will fire upon triggering onSubmit
   addTodo = e => {
+    // Prevent refresh when onSubmit is triggered
     e.preventDefault();
 
+    // Use input validation method as conditional
     if (this.validateInput(this.state.taskInput)) {
       this.props.addTodo(this.state.taskInput);
       this.setState({
         taskInput: ""
       });
     } else {
+      // If "required" attribute of an input field have been altered
       alert("Please enter a task first.");
     }
-  };
-
-  /* Event handler methods */
-
-  handleTaskInputChange = e => {
-    this.setState({
-      taskInput: e.currentTarget.value
-    });
   };
 
   render() {
