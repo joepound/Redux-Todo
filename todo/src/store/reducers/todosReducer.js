@@ -6,30 +6,12 @@ import {
   CLEAR_COMPLETED_TODOS
 } from "../actions/types";
 
-import sampleTodoData from "../../sampleTodoData";
-
 const generateId = () => {
   return `${Date.now()}${Math.floor(Math.random() * 100000000)}`;
 };
 
-const getFromLocalStorage = key => {
-  try {
-    return JSON.parse(localStorage.getItem(key));
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-const setOnLocalStorage = (key, value) => {
-  try {
-    localStorage.setItem(key, JSON.stringify(value));
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-const initialState = {
-  todos: getFromLocalStorage("todos") || sampleTodoData,
+let initialState = {
+  todos: [],
   newTaskInput: ""
 };
 
@@ -51,7 +33,6 @@ const todosReducer = (state = initialState, action) => {
           completed: false
         }
       ];
-      setOnLocalStorage("todos", updatedTodos);
       return {
         ...state,
         todos: updatedTodos
@@ -62,14 +43,12 @@ const todosReducer = (state = initialState, action) => {
           ? { ...todo, completed: !todo.completed }
           : todo
       );
-      setOnLocalStorage("todos", updatedTodos);
       return {
         ...state,
         todos: updatedTodos
       };
     case DELETE_TODO_ITEM:
       updatedTodos = state.todos.filter(todo => todo.id !== action.payload);
-      setOnLocalStorage("todos", updatedTodos);
       return {
         ...state,
         todos: updatedTodos
@@ -86,12 +65,13 @@ const todosReducer = (state = initialState, action) => {
           "Are you sure you want to delete all completed todos?"
         )
       ) {
-        setOnLocalStorage("todos", updatedTodos);
         return {
           ...state,
           todos: updatedTodos
         };
       }
+
+      return state;
     default:
       return state;
   }
