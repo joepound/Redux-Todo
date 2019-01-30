@@ -55,5 +55,4 @@ const mapStateToProps = state => {
   };
 };
 
-// Contains anonymous callback used as the mapStateToProps method
 export default connect(mapStateToProps)(TodoContainer);
