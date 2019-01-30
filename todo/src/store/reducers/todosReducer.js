@@ -1,7 +1,8 @@
 import {
+  HANDLE_TEXT_INPUT_CHANGE,
   ADD_TODO,
   TOGGLE_TODO_COMPLETION,
-  HANDLE_TEXT_INPUT_CHANGE,
+  DELETE_TODO_ITEM,
   CLEAR_COMPLETED_TODOS
 } from "../actions/types";
 
@@ -38,7 +39,6 @@ const todosReducer = (state = initialState, action) => {
         [action.payload.key]: action.payload.input
       };
     case ADD_TODO:
-      console.log(action.payload);
       const newTodo = {
         id: generateId(),
         task: action.payload,
@@ -57,6 +57,11 @@ const todosReducer = (state = initialState, action) => {
       return {
         ...state,
         todos
+      };
+    case DELETE_TODO_ITEM:
+      return {
+        ...state,
+        todos: state.todos.filter(todo => todo.id !== action.payload)
       };
     case CLEAR_COMPLETED_TODOS:
       const incompleteTodos = state.todos.filter(todo => !todo.completed);

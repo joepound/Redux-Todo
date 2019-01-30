@@ -2,10 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-import { toggleTodoCompletion } from "../../store/actions";
+import { toggleTodoCompletion, deleteTodoItem } from "../../store/actions";
 
 const TodoItem = props => {
   const toggleTodoCompletion = e => props.toggleTodoCompletion(props.todo.id);
+  const deleteTodoItem = e => props.deleteTodoItem(props.todo.id);
 
   return (
     <div className="todo-app__list__item">
@@ -39,7 +40,7 @@ const TodoItem = props => {
           type="image"
           src="images/delete-todo.png"
           alt="Delete todo item"
-          onClick={toggleTodoCompletion}
+          onClick={deleteTodoItem}
         />
       </div>
     </div>
@@ -52,12 +53,14 @@ TodoItem.propTypes = {
     task: PropTypes.string.isRequired,
     completed: PropTypes.bool.isRequired
   }).isRequired,
-  toggleTodoCompletion: PropTypes.func.isRequired
+  toggleTodoCompletion: PropTypes.func.isRequired,
+  deleteTodoItem: PropTypes.func.isRequired
 };
 
 export default connect(
   null,
   {
-    toggleTodoCompletion
+    toggleTodoCompletion,
+    deleteTodoItem
   }
 )(TodoItem);

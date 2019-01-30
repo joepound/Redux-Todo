@@ -51,13 +51,13 @@
     }
 
     &__actions {
-      min-width: 70px;
+      min-width: 80px;
 
       %todo-item-action-btn {
         display: inline-block;
         width: 25px;
         cursor: pointer;
-        margin-left: 10px;
+        margin-left: 15px;
       }
 
       &__toggle-completion-btn {
@@ -90,7 +90,7 @@
         transition: filter 375ms;
 
         &:hover {
-          filter: brightness(75%);
+          filter: brightness(62.5%);
           transition: all 250ms;
         }
       }
