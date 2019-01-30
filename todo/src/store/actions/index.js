@@ -77,19 +77,20 @@ export const clearCompletedTodos = todos => dispatch => {
 
   let action = { type: CLEAR_COMPLETED_TODOS, payload: updatedTodos };
 
-  let deleteItem = id => axios
-    .delete(`http://localhost:5000/api/todos/${id}`)
-    .then(res => dispatch({ type: DELETE_TODO_ITEM, payload: res.data }))
-    .catch(
-      error =>
-        (action = {
-          type: ERROR_STATE,
-          payload: "Error in removing completed todos"
-        })
-    );
+  let deleteItem = id =>
+    axios
+      .delete(`http://localhost:5000/api/todos/${id}`)
+      .then(res => dispatch({ type: DELETE_TODO_ITEM, payload: res.data }))
+      .catch(
+        error =>
+          (action = {
+            type: ERROR_STATE,
+            payload: "Error in removing completed todos"
+          })
+      );
 
   for (let i = 0; i < completedTodos.length; i++) {
-    deleteItem(completedTodos[i].id)
+    deleteItem(completedTodos[i].id);
     if (action.type === ERROR_STATE) {
       break;
     }
