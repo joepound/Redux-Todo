@@ -43,20 +43,8 @@ const todosReducer = (state = initialState, action) => {
         [action.payload.key]: action.payload.input
       };
     case ADD_TODO:
-      return {
-        ...state,
-        todos: action.payload
-      };
     case TOGGLE_TODO_COMPLETION:
-      return {
-        ...state,
-        todos: action.payload
-      };
     case DELETE_TODO_ITEM:
-      return {
-        ...state,
-        todos: action.payload
-      };
     case CLEAR_COMPLETED_TODOS:
       return {
         ...state,

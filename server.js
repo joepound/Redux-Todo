@@ -46,6 +46,11 @@ app.put("/api/todos/:id", (req, res) => {
   }
 });
 
+app.delete("/api/todos/clearcompleted", (req, res) => {
+  todos = todos.filter(todo => !todo.completed);
+  res.status(200).json(todos);
+});
+
 app.delete("/api/todos/:id", (req, res) => {
   const foundTodo = todos.find(todo => todo.id === req.params.id);
 
